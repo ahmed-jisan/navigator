@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Battery Indicator</title>
+  <link rel="stylesheet" type="text/css" href="fa/css/all.min.css"/>
+  
+  <style>
+  
+  *{
+  
+  margin: 0;
+  padding: 0;
+  font-family: arial;
+  box-sizing: border-box;
+  
+  }
+  
+  body{
+  
+  background: #47919A;
+  
+  }
+  
+  #container{
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 50px 80px;
+  background: #fff;
+  border-radius:  10px;
+  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.4),0px 0px 10px rgba(0,0,0,0.3);
+  
+  }
+  
+  #battery{
+  
+  height: 150px;
+  width: 300px;
+  //background: red;
+  border: 6px solid #555;
+  border-radius: 15px;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.4)
+  
+  }
+  
+  #curve{
+  
+  height: 50%;
+  width: 15px;
+  background: #555;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-radius: 0px 50px 50px 0px;
+  z-index: -555;
+  
+  }
+  
+  #level{
+  
+  width:  0%;
+  height: 100%;
+  background: #555;
+  border-radius: 10px;
+  
+  }
+  
+  #battery i{
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 50px;
+  color: #aaa;
+  font-weight: bold;
+  display: none;
+  
+  }
+  
+  #percentage{
+  
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: #555;
+  line-height: 50px;
+  
+  }
+  
+  </style>
+  
+</head>
+<body>
+
+  <div id="container">
+  
+  <div id="battery">
+  
+    <div  id="level"></div>
+    <i id="charge" class="fab fa-usb"></i>
+    <div id="curve"></div>
+        
+  </div>
+  
+  <div id="percentage"></div>
+  
+  </div>
+  
+  <script>
+  
+  let level = document.querySelector("#level");
+  let charge = document.querySelector("#charge");
+  let percentage = document.querySelector("#percentage");
+  
+  setInterval(()=>{
+  
+  navigator.getBattery().then(function(battery){
+  
+     level.style.width = battery.level*100 + "%"; 
+     percentage.innerHTML = Math.round(battery.level*100) + "%";
+     
+     if(battery.charging){
+     
+     charge.style.display = "block";
+     
+     }else{
+     
+     charge.style.display = "none";
+     
+     }
+    
+    });
+  
+  },1)
+  
+  </script>
+    
+</body>
+</html>
