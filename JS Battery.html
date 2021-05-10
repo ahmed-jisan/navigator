@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JS Battery</title>
+  
+  <style>
+  
+  *{
+  
+  margin: 0;
+  padding: 0;
+  font-family: arial;
+  box-sizing: border-box;
+  
+  }
+  
+  </style>
+  
+</head>
+<body>
+  
+  <script>
+  
+  setInterval(()=>{
+  
+  navigator.getBattery().then(function(battery){
+  
+     document.body.innerHTML = ("Battery level: " + battery.level * 100 + "% <br/>"); 
+     
+     if(battery.charging){
+     
+     document.body.innerHTML += ("Battery Is Charging!");
+     
+     }else{
+     
+     document.body.innerHTML += ("Battery Is Not Charging!");
+     
+     }
+    
+    });
+  
+  },1)
+  
+  </script>
+  
+</body>
+</html>
